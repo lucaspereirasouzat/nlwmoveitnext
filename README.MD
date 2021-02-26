@@ -1,4 +1,4 @@
-# Test Livelo - Dados do Star Wars
+# NLW #04 - Trilha React
 
 ## Introdução
 
