@@ -1,27 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { CountDonwContext } from "../contexts/CountdonwContext";
 import styles from "../styles/components/CountDown.module.css";
 
 export function CountDown() {
-  const [time, setTime] = useState(23 * 60);
-  const [active, setActive] = useState(false);
-
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
+  const {
+    seconds,
+    minutes,
+    HasFinished,
+    isActive,
+    startCountDonw,
+    resetCountDonw,
+  } = useContext(CountDonwContext);
 
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, "0").split("");
   const [secondLeft, secondRight] = String(seconds).padStart(2, "0").split("");
-
-  function startCountDonw() {
-    setActive(true);
-  }
-
-  useEffect(() => {
-    if (active && time > 0) {
-      setTimeout(() => {
-        setTime(time - 1);
-      }, 1000);
-    }
-  }, [active, time]);
 
   return (
     <div>
@@ -38,13 +30,32 @@ export function CountDown() {
           <span>{secondRight}</span>
         </div>
       </div>
-      <button
-        onClick={() => startCountDonw()}
-        type="button"
-        className={styles.countdonwButton}
-      >
-        Iniciar
-      </button>
+
+      {HasFinished ? (
+        <button type="button" disabled className={styles.countdonwButton}>
+          Ciclo encerrado
+        </button>
+      ) : (
+        <>
+          {isActive ? (
+            <button
+              onClick={resetCountDonw}
+              type="button"
+              className={`${styles.countdonwButton} ${styles.countdonwButtonActive}`}
+            >
+              Abandonar ciclo
+            </button>
+          ) : (
+            <button
+              onClick={startCountDonw}
+              type="button"
+              className={styles.countdonwButton}
+            >
+              Iniciar um ciclo
+            </button>
+          )}
+        </>
+      )}
     </div>
   );
 }
