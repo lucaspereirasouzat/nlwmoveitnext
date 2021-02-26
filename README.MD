@@ -4,6 +4,7 @@
 
 > Projeto criado durante a nlw edição#04 onde foi criado o projeto utilizando o next com tecnologias como a context api para o controle dos estados do site,
 > cokies para salvar offline para não se perder os estados do site e web apis como Notification e Audio
+> Ele está hospedado no vercel com a url `https://nlw-moveit-next-beta.vercel.app/`
 
 ## Instalação
 
